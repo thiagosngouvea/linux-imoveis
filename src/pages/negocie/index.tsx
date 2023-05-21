@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Row, Col, Input, Radio, Select, InputNumber } from "antd";
 import cep from "cep-promise";
-import TextArea from "antd/es/input/TextArea";
 
 export default function Negocie() {
 
@@ -10,6 +9,7 @@ export default function Negocie() {
     const [cepEndereco, setCepEndereco] = useState<string>("");
 
     const { Option } = Select;
+    const { TextArea } = Input;
 
     const buscarCep = async (cepEndereco: string) => {
         const endereco = await cep(cepEndereco)
