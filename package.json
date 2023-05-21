@@ -12,9 +12,14 @@
     "@types/node": "18.15.5",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
+    "antd": "^5.4.7",
     "axios": "^1.4.0",
+    "cep-promise": "^4.4.0",
+    "emailjs": "^4.0.2",
+    "emailjs-com": "^3.2.0",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "js-cookie": "^3.0.5",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -22,6 +27,7 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.3",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7"

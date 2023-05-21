@@ -7,6 +7,6 @@ module.exports = nextConfig
 
 module.exports = {
   images: {
-    domains: ['via.placeholder.com', 'media3.gerenciarimoveis-cf.com.br'],
+    domains: ['via.placeholder.com', 'media3.gerenciarimoveis-cf.com.br', "objectstorage.sa-saopaulo-1.oraclecloud.com"],
   },
 }

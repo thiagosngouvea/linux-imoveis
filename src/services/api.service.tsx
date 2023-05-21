@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { notification } from "antd";
 
-export const URLFiles = "https://app-api.sinclairpharma.com.br/files/";
+// export const URLFiles = "https://app-api.sinclairpharma.com.br/files/";
 
 const api = () => {
   const defaultOptions = {
