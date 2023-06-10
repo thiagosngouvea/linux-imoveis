@@ -16,7 +16,9 @@ const getAll = async (
   }`
 );
 
+const getByUrl = async (url: string) => await api.get(`/properties/${url}`);
 
 export const propertiesService = {
   getAll,
+  getByUrl,
 };
