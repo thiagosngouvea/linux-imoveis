@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Badge } from "antd";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface PropertyCardProps {
   images?: string[] | undefined;
@@ -57,11 +58,13 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
   const router = useRouter();
 
-  const handlePrevImage = () => {
+  const handlePrevImage = (e:any) => {
+    e.preventDefault()
     setCurrentImageIndex((index) => (index === 0 ? images.length - 1 : index - 1));
   };
 
-  const handleNextImage = () => {
+  const handleNextImage = (e:any) => {
+    e.preventDefault()
     setCurrentImageIndex((index) => (index === images.length - 1 ? 0 : index + 1));
   };
 
@@ -75,28 +78,32 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   const replaceAcessUrl = (url: string, reference: string) => {
     //se o link não tiver / na string adiciona
     if (!url.includes("/")) {
-      return `imovel/${url}/${reference}`;
+      return `/imovel/${url}/${reference}`;
     } else {
-      return `imovel/${url}`;
+      return `/imovel/${url}`;
     }
   }
 
   return (
     <Badge.Ribbon text={<span className="font-medium">{transaction}</span>} color="orange">
+      <Link 
+        href={replaceAcessUrl(url || "", reference || "")}
+        target="_blank"
+      >
       <div 
         className="max-w-xs w-96 bg-white shadow-md rounded-lg overflow-hidden cursor-pointer" 
-        onClick={() => router.push(replaceAcessUrl(url || "", reference || ""))}
+        // onClick={() => router.push(replaceAcessUrl(url || "", reference || ""))}
       >
         <div className="relative h-48">
           <button
             className="z-10 absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 text-white focus:outline-none"
-            onClick={handlePrevImage}
+            onClick={(e) => handlePrevImage(e)}
           >
             <IoIosArrowBack size={20} />
           </button>
           <button
             className="z-10 absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 text-white focus:outline-none"
-            onClick={handleNextImage}
+            onClick={(e) => handleNextImage(e)}
           >
             <IoIosArrowForward size={20} />
           </button>
@@ -107,7 +114,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
             objectFit="cover"
           />
         </div>
-        <div className="p-4">
+        <div className="p-4 h-48">
           <h1 className="text-sm text-gray-600 font-semibold mb-2 truncate">{title_formatted}</h1>
           <h2 className="text-gray-500 text-sm truncate">{adressFormatted.formatted}</h2>
           <span className="text-orange-500 text-xl font-bold truncate">{price}</span>
@@ -116,8 +123,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           <p className="text-gray-500 text-sm truncate">{primary_area?.value} {primary_area?.measure} {`(${primary_area?.title})`}</p>
         </div>
       </div>
+      </Link>
     </Badge.Ribbon>
-    
   );
 };
 

@@ -2,8 +2,8 @@ import api from "./api.service";
 
 
 const getAll = async (
-    per_page = 8,
     page = 1,
+    per_page = 8,
     filterBy = "",
     filterValue?: string,
     filterType = ""

@@ -16,7 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
         <div>
             <Header />
             <Navbar />
-            <div className={router.pathname !== "/" && router.pathname !== "/imovel/[url]/[ref]" ? "w-full xl:max-w-screen-xl md:max-w-screen-lg mx-auto mt-8" : ""}>{children}</div>
+            <div className={router.pathname !== "/" && router.pathname !== "/imovel/[url]/[ref]" && router.pathname !== "/imoveis/[negocio]" ? "w-full xl:max-w-screen-xl md:max-w-screen-lg mx-auto mt-8" : ""}>{children}</div>
             <Footer />
         </div>
     );

@@ -72,8 +72,9 @@ export default function Imovel() {
     }, [router.query.url]);
 
     useEffect(() => {
+        if(router?.query?.url)
         getPropertie();
-    }, [getPropertie]);
+    }, [getPropertie, router.query]);
 
     const imagesRefactored = propertie?.images?.map((image) => {
         return image.replace("{size}", "600x450").replace("{type}", "outside");
@@ -172,7 +173,7 @@ export default function Imovel() {
             })}
           </div>
           <div className="flex  justify-between w-full xl:max-w-screen-xl 3xl:max-w-screen-3xl md:max-w-screen-lg mx-auto mt-8">
-            <div>
+            <div className="grid w-2/3">
               <div className="grid">
                 <p className="font-serif text-lg font-bold text-gray-600">Cômodos</p>
                 <div className="flex flex-wrap gap-4 mt-2">
