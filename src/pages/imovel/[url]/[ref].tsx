@@ -52,6 +52,8 @@ interface HTMLRendererProps {
 export default function Imovel() {
   const [propertie, setPropertie] = useState<Property>();
   const [url, setUrl] = useState("");
+  const [updateHead, setUpdateHead] = useState(false);
+
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -130,6 +132,27 @@ export default function Imovel() {
   }, [propertie]);
 
   console.log('propertie', propertie);
+  useEffect(() => {
+    if (updateHead) {
+      const newTitle = propertie?.title_formatted || '';
+      const newImage = imagesRefactored[0] || '';
+      // Atualize o título da página
+      document.title = newTitle;
+
+      // Atualize as meta tags og:title e og:image
+      const ogTitleTag = document.querySelector('meta[property="og:title"]');
+      const ogImageTag = document.querySelector('meta[property="og:image"]');
+
+      if (ogTitleTag) {
+        ogTitleTag.setAttribute('content', newTitle);
+      }
+
+      if (ogImageTag) {
+        ogImageTag.setAttribute('content', `https://${newImage}`);
+      }
+    }
+  }, [updateHead, propertie?.title_formatted, imagesRefactored[0]]);
+
 
   return !!propertie ? (
     <div className="grid">
