@@ -131,7 +131,7 @@ export default function Imovel({ propertie }: ImovelProps) {
       {propertie?.title_formatted && <meta property="og:title" content={propertie?.title_formatted} />}
       {imagesRefactored[0] && <meta property="og:image" content={`https://${imagesRefactored[0]}`} />}
       {propertie?.description && (
-        <meta property="og:description" dangerouslySetInnerHTML={{ __html: propertie?.description }} />
+        <meta property="og:description" content={propertie?.description} />
       )}
       </Head>
       <div className="grid grid-cols-3 w-full xl:max-w-screen-4xl md:max-w-screen-lg mx-auto ">
