@@ -67,21 +67,8 @@ export default function Imovel({ propertie }: ImovelProps) {
 
   const router = useRouter();
 
-  // const getPropertie = useCallback(async () => {
-  //   try {
-  //     const response = await propertiesService.getByUrl(
-  //       router?.query?.url as string
-  //     );
-  //     setPropertie(response.data.properties);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [router.query.url]);
-
-  // useEffect(() => {
-  //   if (router?.query?.url) getPropertie();
-  // }, [getPropertie, router.query]);
-
+ 
+  
   const imagesRefactored =
     propertie?.images?.map((image) => {
       return image.replace("{size}", "600x450").replace("{type}", "outside");
