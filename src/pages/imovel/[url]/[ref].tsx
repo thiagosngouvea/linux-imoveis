@@ -94,7 +94,19 @@ export default function Imovel() {
       return !condominio.match(/^[0-9]/);
     });
 
-    const adress = JSON.parse(propertie?.address || "{}");
+    console.log(propertie?.address);
+
+    const verifyIfIsJson = (string: any) => {
+      try {
+        JSON.parse(string);
+      } catch (error) {
+        return false;
+      }
+      return true;
+    }
+
+
+    const adress = verifyIfIsJson(propertie?.address) ? JSON.parse(propertie?.address || "{}") : { formatted: propertie?.address }
 
     useEffect(() => {
       divRef.current?.querySelectorAll("h3").forEach((h3) => {
@@ -119,14 +131,14 @@ export default function Imovel() {
         <div className="grid">
           <div className="grid grid-cols-3 w-full xl:max-w-screen-4xl md:max-w-screen-lg mx-auto ">
             <div className="grid col-span-2">
-              <Image src={imagesRefactored[0] || "https://via.placeholder.com/1200x800"} alt="Left Image" className="w-full" height={444} width="100%"/>
+              <Image src={'https://'+imagesRefactored[0] || "https://via.placeholder.com/1200x800"} alt="Left Image" className="w-full" height={444} width="100%"/>
             </div>
             <div className="grid grid-rows-2">
               <div className="h-1/2">
-                <Image src={imagesRefactored[1] || "https://via.placeholder.com/1200x800"} alt="Top Right Image" className="w-full" height={219} width="100%" />
+                <Image src={'https://'+imagesRefactored[1] || "https://via.placeholder.com/1200x800"} alt="Top Right Image" className="w-full" height={219} width="100%" />
               </div>
               <div className="h-1/2">
-                <Image src={imagesRefactored[2] || "https://via.placeholder.com/1200x800"} alt="Bottom Right Image" className="w-full" height={219} width="100%"/>
+                <Image src={'https://'+imagesRefactored[2] || "https://via.placeholder.com/1200x800"} alt="Bottom Right Image" className="w-full" height={219} width="100%"/>
               </div>
             </div>
           </div>
@@ -151,27 +163,29 @@ export default function Imovel() {
                 </button>
             </div>
           </div>
-          <div className="flex h-48 w-full bg-[#FEF1EA] mt-8 justify-center align-center items-center gap-x-8">
-            {propertie?.infos_principais.map((item, index) => {
-              return (
-                <div key={index} className="grid justify-center items-center">
-                <span className="grid justify-center text-orange-500">
-                  {item.title.includes("Garage") ? <FaCar size={32} /> :
-                  item.title.includes("Suíte") ? <FaBed size={32} /> :
-                  item.title.includes("m²") ? <FaExpand size={32} /> :
-                  <BiTagAlt size={32} />
-                  }
-                </span>
-                <span className="font-bold text-gray-600 text-md justify-center grid">
-                  {item.title}
-                </span>
-                  <span className={`font-normal text-gray-600 text-md justify-center grid ${!item.subtitle && "invisible"}`}>
-                    {item.subtitle ?? "-"}
+          {propertie?.infos_principais && (
+            <div className="flex h-48 w-full bg-[#FEF1EA] mt-8 justify-center align-center items-center gap-x-8">
+              {propertie?.infos_principais.map((item, index) => {
+                return (
+                  <div key={index} className="grid justify-center items-center">
+                  <span className="grid justify-center text-orange-500">
+                    {item.title.includes("Garage") ? <FaCar size={32} /> :
+                    item.title.includes("Suíte") ? <FaBed size={32} /> :
+                    item.title.includes("m²") ? <FaExpand size={32} /> :
+                    <BiTagAlt size={32} />
+                    }
                   </span>
-              </div>
-              );
-            })}
-          </div>
+                  <span className="font-bold text-gray-600 text-md justify-center grid">
+                    {item.title}
+                  </span>
+                    <span className={`font-normal text-gray-600 text-md justify-center grid ${!item.subtitle && "invisible"}`}>
+                      {item.subtitle ?? "-"}
+                    </span>
+                </div>
+                );
+              })}
+            </div>
+          )}
           <div className="flex  justify-between w-full xl:max-w-screen-xl 3xl:max-w-screen-3xl md:max-w-screen-lg mx-auto mt-8">
             <div className="grid w-2/3">
               <div className="grid">
@@ -203,15 +217,19 @@ export default function Imovel() {
               </div>
             </div>
             <div className="grid w-1/4">
-              <h3 className="font-serif text-lg font-bold text-gray-600 flex justify-start">Ficha do Imóvel</h3>
-              <div className="mt-2 mb-8">
-                {propertie?.ficha_imovel.map((ficha, index) => (
-                  <div key={index} className={`flex justify-between p-1 ${index % 2 === 0 ? "bg-[#FEF8F5]" : ""}`}>
-                    <p className="text-gray-600">{ficha.title}</p>
-                    <p className="text-gray-600 font-bold">{ficha.value}</p>
-                  </div>
-                ))}
-              </div>
+              {propertie?.ficha_imovel && (
+                <>
+                <h3 className="font-serif text-lg font-bold text-gray-600 flex justify-start">Ficha do Imóvel</h3>
+                <div className="mt-2 mb-8">
+                  {propertie?.ficha_imovel.map((ficha, index) => (
+                    <div key={index} className={`flex justify-between p-1 ${index % 2 === 0 ? "bg-[#FEF8F5]" : ""}`}>
+                      <p className="text-gray-600">{ficha.title}</p>
+                      <p className="text-gray-600 font-bold">{ficha.value}</p>
+                    </div>
+                  ))}
+                </div>
+                </>
+              )}
 
               <div className="border p-4">
                 <h3 className="font-bold text-md text-gray-600">Linux Imóveis</h3>

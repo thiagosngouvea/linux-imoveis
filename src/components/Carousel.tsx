@@ -39,12 +39,13 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ imageSrc, text, description
   return (
     <div className="md:flex xs:grid justify-center items-center mx-4">
         <img 
-        src={imageSrc} 
+        src={'https://'+imageSrc} 
         alt="Imagem do Carrossel" 
         className="mx-4"
         style={{
           clipPath: "polygon(0px 0px, 100% 0px, 84% 93%, 0% 100%)",
         }}
+        width={600}
         />
       <div className="lg:w-1/2 sm:w-1/2 sm:grid justify-center items-center align-center">
         <div className='grid'>

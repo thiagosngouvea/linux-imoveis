@@ -69,11 +69,38 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   };
 
   //refatorar os links das imagens e remover o /{size}/{type}
-  const imagesRefactored = images.map((image) => {
-    return image.replace("{size}", "600x450").replace("{type}", "outside");
+  const imagesRefactored = images?.map((image) => {
+    return image;
   });
 
-  const adressFormatted = JSON.parse(address || "{}");
+  const verificarJson = (json: any) => {
+    //verifica se o json é um objeto
+    if (typeof json === "object") {
+      //verifica se o json é um array
+      if (Array.isArray(json)) {
+        //verifica se o array é vazio
+        if (json.length === 0) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        //verifica se o objeto é vazio
+        if (Object.keys(json).length === 0) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    } else {
+      return false;
+    }
+  };
+
+  const adressFormatted = verificarJson(address) ? JSON.parse(address || "{}") : address;
+
+
+
 
   const replaceAcessUrl = (url: string, reference: string) => {
     //se o link não tiver / na string adiciona
@@ -107,8 +134,9 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           >
             <IoIosArrowForward size={20} />
           </button>
+
           <Image
-            src={imagesRefactored[currentImageIndex]}
+            src={!!imagesRefactored ? 'https://'+imagesRefactored[currentImageIndex] : 'https://via.placeholder.com/300'}
             alt="Property image"
             layout="fill"
             objectFit="cover"

@@ -267,7 +267,7 @@ export default function Home() {
                     </Form.Item>
                   </Col>
                   <Col span={6}>
-                    <Form.Item label={<span className="font-bold">Valor mínimo</span>} name="valor_min">
+                    <Form.Item label={<span className="font-bold">Valor Mínimo</span>} name="valor_min">
                       <Input
                         placeholder="Digite o valor mínimo"
                         size="large"
@@ -389,7 +389,7 @@ export default function Home() {
               {properties.map((item, index) => (
                 <CarouselItem 
                   key={index} 
-                  imageSrc={item.images[0].replace("{size}", "600x450").replace("{type}", "outside")} 
+                  imageSrc={item.images ? item?.images[0] : "linuximoveis.nyc3.digitaloceanspaces.com/propertiesImages/ab774d90f94834844bdcc5858a047a90-Resultado-PPGEC.pn"} 
                   text={item.title_formatted} 
                   description={item.description}
                   price={item.price}

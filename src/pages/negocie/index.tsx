@@ -131,81 +131,81 @@ export default function Negocie() {
                                         {
                                             label: <span className="font-bold text-sm text-black">Apartamento</span>,
                                             options: [
-                                                {label: "Alto Padrão", value: "apartamento_alto_padrao"},
-                                                {label: "Cobertura", value: "apartamento_cobertura"},
-                                                {label: "Cobertura Duplex", value: "apartamento_cobertura_duplex"},
-                                                {label: "Cobertura Linear", value: "apartamento_cobertura_linear"},
-                                                {label: "Cobertura Triplex", value: "apartamento_cobertura_triplex"},
-                                                {label: "Com área externa", value: "apartamento_area_externa"},
-                                                {label: "Conjugado", value: "apartamento_conjugado"},
-                                                {label: "Duplex", value: "apartamento_duplex"},
-                                                {label: "Flat", value: "apartamento_flat"},
-                                                {label: "Garden", value: "apartamento_garden"},
-                                                {label: "Kitnet", value: "apartamento_kitnet"},
-                                                {label: "Loft", value: "apartamento_loft"},
-                                                {label: "Padrão", value: "apartamento_padrao"},
-                                                {label: "Penthouse", value: "apartamento_penthouse"},
-                                                {label: "Studio", value: "apartamento_studio"},
-                                                {label: "Triplex", value: "apartamento_triplex"},
-                                                {label: "Térreo", value: "apartamento_terreo"},
+                                                {label: "Alto Padrão", value: "apartamento-alto-padrao"},
+                                                {label: "Cobertura", value: "apartamento-cobertura"},
+                                                {label: "Cobertura Duplex", value: "apartamento-cobertura-duplex"},
+                                                {label: "Cobertura Linear", value: "apartamento-cobertura-linear"},
+                                                {label: "Cobertura Triplex", value: "apartamento-cobertura-triplex"},
+                                                {label: "Com área externa", value: "apartamento-area-externa"},
+                                                {label: "Conjugado", value: "apartamento-conjugado"},
+                                                {label: "Duplex", value: "apartamento-duplex"},
+                                                {label: "Flat", value: "apartamento-flat"},
+                                                {label: "Garden", value: "apartamento-garden"},
+                                                {label: "Kitnet", value: "apartamento-kitnet"},
+                                                {label: "Loft", value: "apartamento-loft"},
+                                                {label: "Padrão", value: "apartamento-padrao"},
+                                                {label: "Penthouse", value: "apartamento-penthouse"},
+                                                {label: "Studio", value: "apartamento-studio"},
+                                                {label: "Triplex", value: "apartamento-triplex"},
+                                                {label: "Térreo", value: "apartamento-terreo"},
                                             ],
                                         },
                                         {
                                             label: <span className="font-bold text-sm text-black">Casa</span>,
                                             options: [
-                                                {label: "Alto Padrão", value: "casa_alto_padrao"},
-                                                {label: "Alvenaria", value: "casa_alvenaria"},
-                                                {label: "Chalé", value: "casa_chale"},
-                                                {label: "Duplex", value: "casa_duplex"},
-                                                {label: "Geminada", value: "casa_geminada"},
-                                                {label: "kitnet", value: "casa_kitnet"},
-                                                {label: "Linear", value: "casa_linear"},
-                                                {label: "Madeira", value: "casa_madeira"},
-                                                {label: "Mista", value: "casa_mista"},
-                                                {label: "Padrão", value: "casa_padrao"},
-                                                {label: "Sobrado", value: "casa_sobrado"},
-                                                {label: "Pré-moldada", value: "casa_pre_moldada"},
-                                                {label: "Sobreloja", value: "casa_sobreloja"},
-                                                {label: "Sobreposta", value: "casa_sobreposta"},
-                                                {label: "Triplex", value: "casa_triplex"},
-                                                {label: "Térrea", value: "casa_terrea"},
-                                                {label: "Vila", value: "casa_vila"},
-                                                {label: "em Condomínio", value: "casa_em_condominio"},
+                                                {label: "Alto Padrão", value: "casa-alto-padrao"},
+                                                {label: "Alvenaria", value: "casa-alvenaria"},
+                                                {label: "Chalé", value: "casa-chale"},
+                                                {label: "Duplex", value: "casa-duplex"},
+                                                {label: "Geminada", value: "casa-geminada"},
+                                                {label: "kitnet", value: "casa-kitnet"},
+                                                {label: "Linear", value: "casa-linear"},
+                                                {label: "Madeira", value: "casa-madeira"},
+                                                {label: "Mista", value: "casa-mista"},
+                                                {label: "Padrão", value: "casa-padrao"},
+                                                {label: "Sobrado", value: "casa-sobrado"},
+                                                {label: "Pré-moldada", value: "casa-pre-moldada"},
+                                                {label: "Sobreloja", value: "casa-sobreloja"},
+                                                {label: "Sobreposta", value: "casa-sobreposta"},
+                                                {label: "Triplex", value: "casa-triplex"},
+                                                {label: "Térrea", value: "casa-terrea"},
+                                                {label: "Vila", value: "casa-vila"},
+                                                {label: "em Condomínio", value: "casa-em-condominio"},
                                             ],
                                         },
                                         {
                                             label: <span className="font-bold text-sm text-black">Terreno</span>,
                                             options: [
-                                                {label: "Lote", value: "terreno_lote"},
+                                                {label: "Lote", value: "terreno-lote"},
                                                 {label: "Terreno", value: "terreno"},
-                                                {label: "em Condomínio", value: "terreno_em_condominio"},
-                                                {label: "em Loteamento", value: "terreno_em_loteamento"},
+                                                {label: "em Condomínio", value: "terreno-em-condominio"},
+                                                {label: "em Loteamento", value: "terreno-em-loteamento"},
                                             ],
                                         },
                                         {
                                             label: <span className="font-bold text-sm text-black">Sítio</span>,
                                             options: [
                                                 {label: "Sítio", value: "sitio"},
-                                                {label: "Haras", value: "sitio_haras"},
+                                                {label: "Haras", value: "sitio-haras"},
                                             ],
                                         },
                                         {
                                             label: <span className="font-bold text-sm text-black">Garagem</span>,
                                             options: [
-                                                {label: "Box", value: "garagem_box"},
-                                                {label: "Garagem Externa", value: "garagem_externa"},
-                                                {label: "Garagem Externa Coberta", value: "garagem_externa_coberta"},
-                                                {label: "Garagem Interna", value: "garagem_interna"},
+                                                {label: "Box", value: "garagem-box"},
+                                                {label: "Garagem Externa", value: "garagem-externa"},
+                                                {label: "Garagem Externa Coberta", value: "garagem-externa-coberta"},
+                                                {label: "Garagem Interna", value: "garagem-interna"},
                                             ],
                                         },
                                         {
                                             label: <span className="font-bold text-sm text-black">Fazenda</span>,
                                             options: [
                                                 {label: "Fazenda", value: "fazenda"},
-                                                {label: "Haras", value: "fazenda_haras"},
-                                                {label: "Lavoura", value: "fazenda_lavoura"},
-                                                {label: "Mista", value: "fazenda_mista"},
-                                                {label: "Pecuária", value: "fazenda_pecuaria"},
+                                                {label: "Haras", value: "fazenda-haras"},
+                                                {label: "Lavoura", value: "fazenda-lavoura"},
+                                                {label: "Mista", value: "fazenda-mista"},
+                                                {label: "Pecuária", value: "fazenda-pecuaria"},
                                             ],
                                         },
                                         {
@@ -229,15 +229,15 @@ export default function Negocie() {
                                         {
                                             label: <span className="font-bold text-sm text-black">Sala</span>,
                                             options: [
-                                                {label: "Andar Comercial", value: "sala_andar_comercial"},
-                                                {label: "Comercial", value: "sala_comercial"},
+                                                {label: "Andar Comercial", value: "sala-andar-comercial"},
+                                                {label: "Comercial", value: "sala-comercial"},
                                             ],
                                         },
                                         {
                                             label: <span className="font-bold text-sm text-black">Loja</span>,
                                             options: [
                                                 {label: "Loja", value: "loja"},
-                                                {label: "Ponto Comercial", value: "loja_ponto_comercial"},
+                                                {label: "Ponto Comercial", value: "loja-ponto-comercial"},
                                             ],
                                         },
                                         {
@@ -249,17 +249,17 @@ export default function Negocie() {
                                         {
                                             label: <span className="font-bold text-sm text-black">Sobrado</span>,
                                             options: [
-                                                {label: "Alto padrão", value: "sobrado_alto_padrao"},
-                                                {label: "Geminado", value: "sobrado_geminado"},
-                                                {label: "Padrão", value: "sobrado_padrao"},
-                                                {label: "em Condomínio", value: "sobrado_em_condominio"},
+                                                {label: "Alto padrão", value: "sobrado-alto-padrao"},
+                                                {label: "Geminado", value: "sobrado-geminado"},
+                                                {label: "Padrão", value: "sobrado-padrao"},
+                                                {label: "em Condomínio", value: "sobrado-em-condominio"},
                                             ],
                                         },
                                         {
                                             label: <span className="font-bold text-sm text-black">Prédio</span>,
                                             options: [
-                                                {label: "Comercial", value: "predio_comercial"},
-                                                {label: "Residencial", value: "predio_comercial"},
+                                                {label: "Comercial", value: "predio-comercial"},
+                                                {label: "Residencial", value: "predio-comercial"},
                                             ],
                                         },
                                         {
@@ -271,29 +271,29 @@ export default function Negocie() {
                                         {
                                             label: <span className="font-bold text-sm text-black">Pavilhão/Galpão</span>,
                                             options: [
-                                                {label: "Em condomínio", value: "pavilhao_galpao_condominio"},
-                                                {label: "Industrial", value: "pavilhao_galpao_industrial"},
-                                                {label: "Logístico", value: "pavilhao_galpao_logistico"},
-                                                {label: "Salão Comercial", value: "pavilhao_galpao_salao_comercial"},
+                                                {label: "Em condomínio", value: "pavilhao-galpao-condominio"},
+                                                {label: "Industrial", value: "pavilhao-galpao-industrial"},
+                                                {label: "Logístico", value: "pavilhao-galpao-logistico"},
+                                                {label: "Salão Comercial", value: "pavilhao-galpao-salao-comercial"},
                                             ],
                                         },
                                         {
                                             label: <span className="font-bold text-sm text-black">Área</span>,
                                             options: [
-                                                {label: "Comercial", value: "area_comercial"},
-                                                {label: "Industrial", value: "area_industrial"},
-                                                {label: "Reflorestamento", value: "area_reflorestamento"},
-                                                {label: "Residencial", value: "area_residencial"},
-                                                {label: "Residencial/Comercial", value: "area_residencial_comercial"},
-                                                {label: "Rural", value: "area_rural"},
+                                                {label: "Comercial", value: "area-comercial"},
+                                                {label: "Industrial", value: "area-industrial"},
+                                                {label: "Reflorestamento", value: "area-reflorestamento"},
+                                                {label: "Residencial", value: "area-residencial"},
+                                                {label: "Residencial/Comercial", value: "area-residencial-comercial"},
+                                                {label: "Rural", value: "area-rural"},
                                             ],
                                         },
                                         {
                                             label: <span className="font-bold text-sm text-black">Ponto Comercial</span>,
                                             options: [
-                                                {label: "Andar Comercial", value: "ponto_comercial_andar_comercial"},
-                                                {label: "Comercio", value: "ponto_comercial_comercio"},
-                                                {label: "Indústria", value: "ponto_comercial_industria"},
+                                                {label: "Andar Comercial", value: "ponto-comercial-andar-comercial"},
+                                                {label: "Comercio", value: "ponto-comercial-comercio"},
+                                                {label: "Indústria", value: "ponto-comercial-industria"},
                                             ],
                                         },
                                     ]}
@@ -315,7 +315,7 @@ export default function Negocie() {
                                         onChange={(e) => setCepEndereco(e.target.value)}
                                     />
                                 </Form.Item>
-                                <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" rel="noreferrer" className="text-blue-500 mt-8 ml-2">Não sei meu CEP</a>
+                                <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="-blank" rel="noreferrer" className="text-blue-500 mt-8 ml-2">Não sei meu CEP</a>
                             </div>
                         </Col>
                     </Row>
@@ -332,25 +332,25 @@ export default function Negocie() {
                                     <Option value="amazonas">Amazonas</Option>
                                     <Option value="bahia">Bahia</Option>
                                     <Option value="ceara">Ceará</Option>
-                                    <Option value="distrito_federal">Distrito Federal</Option>
-                                    <Option value="espirito_santo">Espírito Santo</Option>
+                                    <Option value="distrito-federal">Distrito Federal</Option>
+                                    <Option value="espirito-santo">Espírito Santo</Option>
                                     <Option value="goias">Goiás</Option>
                                     <Option value="maranhao">Maranhão</Option>
-                                    <Option value="mato_grosso">Mato Grosso</Option>
-                                    <Option value="mato_grosso_do_sul">Mato Grosso do Sul</Option>
-                                    <Option value="minas_gerais">Minas Gerais</Option>
+                                    <Option value="mato-grosso">Mato Grosso</Option>
+                                    <Option value="mato-grosso-do-sul">Mato Grosso do Sul</Option>
+                                    <Option value="minas-gerais">Minas Gerais</Option>
                                     <Option value="para">Pará</Option>
                                     <Option value="paraiba">Paraíba</Option>
                                     <Option value="parana">Paraná</Option>
                                     <Option value="pernambuco">Pernambuco</Option>
                                     <Option value="piaui">Piauí</Option>
-                                    <Option value="rio_de_janeiro">Rio de Janeiro</Option>
-                                    <Option value="rio_grande_do_norte">Rio Grande do Norte</Option>
-                                    <Option value="rio_grande_do_sul">Rio Grande do Sul</Option>
+                                    <Option value="rio-de-janeiro">Rio de Janeiro</Option>
+                                    <Option value="rio-grande-do-norte">Rio Grande do Norte</Option>
+                                    <Option value="rio-grande-do-sul">Rio Grande do Sul</Option>
                                     <Option value="rondonia">Rondônia</Option>
                                     <Option value="roraima">Roraima</Option>
-                                    <Option value="santa_catarina">Santa Catarina</Option>
-                                    <Option value="sao_paulo">São Paulo</Option>
+                                    <Option value="santa-catarina">Santa Catarina</Option>
+                                    <Option value="sao-paulo">São Paulo</Option>
                                     <Option value="sergipe">Sergipe</Option>
                                     <Option value="tocantins">Tocantins</Option>
                                 </Select>
@@ -409,7 +409,7 @@ export default function Negocie() {
                     <Row gutter={16}>
                         <Col span={8}>
                             <Form.Item
-                                name="preço_imovel"
+                                name="preço-imovel"
                                 label="Preço do imóvel"
                                 >
                                 <InputNumber 
@@ -420,7 +420,7 @@ export default function Negocie() {
                         </Col>
                         <Col span={8}>
                             <Form.Item
-                                name="preço_condominio"
+                                name="preço-condominio"
                                 label="Condomínio (R$/mês)"
                                 >
                                 <InputNumber
@@ -431,7 +431,7 @@ export default function Negocie() {
                         </Col>
                         <Col span={8}>
                             <Form.Item
-                                name="preço_iptu"
+                                name="preço-iptu"
                                 label="IPTU (R$/ano)"
                                 >
                                 <InputNumber
