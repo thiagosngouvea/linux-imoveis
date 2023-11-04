@@ -132,10 +132,10 @@ export default function Imovel() {
   return (
     <div className="grid">
       <Head>
-        <title>{propertie?.title_formatted}</title>
-        <meta property="og:title" content={propertie?.title_formatted} />
-        <meta property="og:image" content={`https://${imagesRefactored[0]}`} />
-        <meta property="og:description" content="Your description goes here" />
+      <title>{propertie?.title_formatted}</title>
+      {propertie?.title_formatted && <meta property="og:title" content={propertie?.title_formatted} />}
+      {imagesRefactored[0] && <meta property="og:image" content={`https://${imagesRefactored[0]}`} />}
+      <meta property="og:description" content="Sua descrição aqui" />
       </Head>
       <div className="grid grid-cols-3 w-full xl:max-w-screen-4xl md:max-w-screen-lg mx-auto ">
         <div className="grid col-span-2">
