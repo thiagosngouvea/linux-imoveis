@@ -16,6 +16,7 @@
     "antd": "^5.4.7",
     "axios": "^1.4.0",
     "cep-promise": "^4.4.0",
+    "cheerio": "^1.0.0-rc.12",
     "emailjs": "^4.0.2",
     "emailjs-com": "^3.2.0",
     "eslint": "8.36.0",

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { FaBed, FaCar, FaExpand } from "react-icons/fa";
 import { BiTagAlt } from "react-icons/bi";
 import { propertiesService } from "@/services/properties.service";
+import cheerio from "cheerio";
 import Head from "next/head";
 
 interface Property {
@@ -122,6 +123,18 @@ export default function Imovel({ propertie }: ImovelProps) {
     });
   }, [propertie]);
 
+  function removerTagsHTML(textoHTML: any) {
+    return textoHTML.replace(/<[^>]*>/g, '\n');
+  }
+
+  const textoSemTags = removerTagsHTML(propertie?.description);
+
+  const $ = cheerio.load(textoSemTags);
+
+  // Extrair o texto
+  const plainText = $.text();
+
+
   return !!propertie ? (
     <div className="grid">
       <Head>
@@ -130,8 +143,8 @@ export default function Imovel({ propertie }: ImovelProps) {
 
       {propertie?.title_formatted && <meta property="og:title" content={propertie?.title_formatted} />}
       {imagesRefactored[0] && <meta property="og:image" content={`https://${imagesRefactored[0]}`} />}
-      {propertie?.description && (
-        <meta property="og:description" content={propertie?.description} />
+      {plainText && (
+        <meta property="og:description" content={plainText} />
       )}
       </Head>
       <div className="grid grid-cols-3 w-full xl:max-w-screen-4xl md:max-w-screen-lg mx-auto ">
