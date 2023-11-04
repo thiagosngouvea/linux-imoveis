@@ -67,7 +67,8 @@ export default function Imovel({ propertie }: ImovelProps) {
 
   const router = useRouter();
 
- 
+
+  
   
   const imagesRefactored =
     propertie?.images?.map((image) => {
