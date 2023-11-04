@@ -131,11 +131,12 @@ export default function Imovel() {
 
   console.log('propertie', propertie);
 
-  return (
+  return !!propertie ? (
     <div className="grid">
       <Head>
 
       {propertie?.title_formatted && <title>{propertie?.title_formatted}</title>}
+
       {propertie?.title_formatted && <meta property="og:title" content={propertie?.title_formatted} />}
       {imagesRefactored[0] && <meta property="og:image" content={`https://${imagesRefactored[0]}`} />}
       <meta property="og:description" content="Sua descrição aqui" />
@@ -358,6 +359,10 @@ export default function Imovel() {
           </div>
         </div>
       </div>
+    </div>
+  ) : (
+    <div className="flex justify-center items-center w-full h-screen">
+      <p className="text-4xl font-bold text-gray-600">Carregando...</p>
     </div>
   );
 }
