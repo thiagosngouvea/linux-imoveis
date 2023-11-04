@@ -49,10 +49,13 @@ interface HTMLRendererProps {
   htmlString: string;
 }
 
-export default function Imovel() {
-  const [propertie, setPropertie] = useState<Property>();
+interface ImovelProps {
+  propertie: Property;
+}
+
+
+export default function Imovel({ propertie }: ImovelProps) {
   const [url, setUrl] = useState("");
-  const [updateHead, setUpdateHead] = useState(false);
 
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -64,20 +67,20 @@ export default function Imovel() {
 
   const router = useRouter();
 
-  const getPropertie = useCallback(async () => {
-    try {
-      const response = await propertiesService.getByUrl(
-        router?.query?.url as string
-      );
-      setPropertie(response.data.properties);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [router.query.url]);
+  // const getPropertie = useCallback(async () => {
+  //   try {
+  //     const response = await propertiesService.getByUrl(
+  //       router?.query?.url as string
+  //     );
+  //     setPropertie(response.data.properties);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [router.query.url]);
 
-  useEffect(() => {
-    if (router?.query?.url) getPropertie();
-  }, [getPropertie, router.query]);
+  // useEffect(() => {
+  //   if (router?.query?.url) getPropertie();
+  // }, [getPropertie, router.query]);
 
   const imagesRefactored =
     propertie?.images?.map((image) => {
@@ -130,29 +133,6 @@ export default function Imovel() {
       ul.classList.add("list-disc", "ml-8");
     });
   }, [propertie]);
-
-  console.log('propertie', propertie);
-  useEffect(() => {
-    if (updateHead) {
-      const newTitle = propertie?.title_formatted || '';
-      const newImage = imagesRefactored[0] || '';
-      // Atualize o título da página
-      document.title = newTitle;
-
-      // Atualize as meta tags og:title e og:image
-      const ogTitleTag = document.querySelector('meta[property="og:title"]');
-      const ogImageTag = document.querySelector('meta[property="og:image"]');
-
-      if (ogTitleTag) {
-        ogTitleTag.setAttribute('content', newTitle);
-      }
-
-      if (ogImageTag) {
-        ogImageTag.setAttribute('content', `https://${newImage}`);
-      }
-    }
-  }, [updateHead, propertie?.title_formatted, imagesRefactored[0]]);
-
 
   return !!propertie ? (
     <div className="grid">
@@ -388,4 +368,26 @@ export default function Imovel() {
       <p className="text-4xl font-bold text-gray-600">Carregando...</p>
     </div>
   );
+}
+
+
+export async function getServerSideProps(context: any) {
+  const { query } = context;
+  const { url } = query;
+
+  try {
+    const response = await propertiesService.getByUrl(url as string);
+    const propertie = response.data.properties;
+
+    return {
+      props: {
+        propertie,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {},
+    };
+  }
 }
