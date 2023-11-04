@@ -6,9 +6,10 @@ interface CarouselItemProps {
   text: string;
   description: any;
   price?: string;
+  link: string;
 }
 
-const CarouselItem: React.FC<CarouselItemProps> = ({ imageSrc, text, description, price }) => {
+const CarouselItem: React.FC<CarouselItemProps> = ({ imageSrc, text, description, price, link }) => {
 
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -37,7 +38,10 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ imageSrc, text, description
   }, [description]);
 
   return (
-    <div className="md:flex xs:grid justify-center items-center mx-4">
+    <div 
+      className="md:flex xs:grid justify-center items-center mx-4"
+      onClick={()=> window.open(link, "_blank")}
+      >
         <img 
         src={'https://'+imageSrc} 
         alt="Imagem do Carrossel" 

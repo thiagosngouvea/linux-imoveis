@@ -95,11 +95,6 @@ export default function Home() {
 
   const [properties, setProperties] = useState<Property[]>([])
 
-  //        current={page}
-  // total={total}
-  // pageSize={pageSize}
-  // onChange={handlePagination}
-
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
   const [pageSize, setPageSize] = useState(8)
@@ -114,6 +109,9 @@ export default function Home() {
   const [cidade, setCidade] = useState<string | null>(null)
   const [bairro, setBairro] = useState<string | null>(null)
   const [condominios, setCondominios] = useState<string | null>(null)
+
+  const [tipoBuscaReferencia, setTipoBuscaReferencia] = useState<boolean | null>(false)
+  const [referencia, setReferencia] = useState<string | null>(null)
 
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
@@ -180,7 +178,7 @@ export default function Home() {
   };
 
   return (
-   <div className="">
+   <div className="xs:px-4 md:px-0">
      <Image
         src={Background}
         alt="Workflow"
@@ -192,199 +190,241 @@ export default function Home() {
           <div className="grid">
             <div className="flex justify-between w-full xl:max-w-screen-lg 3xl:max-w-screen-lg md:max-w-screen-lg mx-auto">
               <span className="font-medium">Encontre o seu imóvel ideal</span>
-              <span className="font-light">Referência</span>
+              <button 
+                className="font-light underline"
+                onClick={() => {
+                  setTipoBuscaReferencia(!tipoBuscaReferencia)
+                }}
+              >{!!tipoBuscaReferencia ? "Voltar" : "Referência"}</button>
             </div>
             <div className="w-full xl:max-w-screen-lg 3xl:max-w-screen-lg md:max-w-screen-lg mx-auto">
-              <Form 
-                layout="vertical"
-                fields={[
-                  {
-                    name: ["negocio"],
-                    value: negocio,
-                  },
-                  {
-                    name: ["tipo_imovel"],
-                    value: tipo,
-                  },
-                  {
-                    name: ["valor_min"],
-                    value: valorMin,
-                  },
-                  {
-                    name: ["valor_max"],
-                    value: valorMax,
-                  },
-                  {
-                    name: ["cidade"],
-                    value: cidade,
-                  },
-                  {
-                    name: ["bairro"],
-                    value: bairro,
-                  },
-                  {
-                    name: ["condominios"],
-                    value: condominios,
-                  },
-                ]}
-              >
-                <Row gutter={16}>
-                  <Col span={6}>
-                    <Form.Item label={<span className="font-bold">Negócio</span>} name="negocio">
-                      <Select
-                        placeholder="Selecione"
-                        allowClear
-                        size="large"
-                        onChange={(value) => {
-                          setNegocio(value)
-                        }}
-                      >
-                        <Select.Option value="venda">Comprar</Select.Option>
-                        <Select.Option value="aluguel">Alugar</Select.Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col span={6}>
-                    <Form.Item label={<span className="font-bold">Tipo de imóvel</span>} name="tipo_imovel">
-                      <Select
-                        placeholder="Selecione"
-                        allowClear
-                        size="large"
-                        onChange={(value) => {
-                          setTipo(value)
-                        }}
-                      >
-                        <Select.Option value="Apartamento">Apartamento</Select.Option>
-                        <Select.Option value="Casa">Casa</Select.Option>
-                        <Select.Option value="Terreno">Terreno</Select.Option>
-                        <Select.Option value="Fazenda">Fazenda</Select.Option>
-                        <Select.Option value="Chácara">Chácara</Select.Option>
-                        <Select.Option value="Sala">Sala</Select.Option>
-                        <Select.Option value="Prédio">Prédio</Select.Option>
-                        <Select.Option value="Pavilhão/Galpão">Pavilhão/Galpão</Select.Option>
-                        <Select.Option value="Ponto Comercial">Ponto Comercial</Select.Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col span={6}>
-                    <Form.Item label={<span className="font-bold">Valor Mínimo</span>} name="valor_min">
-                      <Input
-                        placeholder="Digite o valor mínimo"
-                        size="large"
-                        onChange={(e) => {
-                          const inputValue = e.target.value.replace(/\D/g, '');
-                          const formatted = new Intl.NumberFormat('pt-BR', {
-                            style: 'currency',
-                            currency: 'BRL',
-                            minimumFractionDigits: 2,
-                          }).format(Number(inputValue) / 100);
-                          setValorMin(formatted);
-                        }}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={6}>
-                    <Form.Item label={<span className="font-bold">Valor Máximo</span>} name="valor_max">
-                      <Input
-                        placeholder="Digite o valor máximo"
-                        size="large"
-                        value={formattedValue}
-                        onChange={(e) => {
-                          const inputValue = e.target.value.replace(/\D/g, '');
-                          const formatted = new Intl.NumberFormat('pt-BR', {
-                            style: 'currency',
-                            currency: 'BRL',
-                            minimumFractionDigits: 2,
-                          }).format(Number(inputValue) / 100);
-                          setValorMax(formatted);
-                        }}
-                      />
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row gutter={16}>
-                <Col span={8}>
-                    <Form.Item label={<span className="font-bold">Cidade</span>} name="cidade">
-                      <Select
-                        placeholder="Selecione"
-                        allowClear
-                        size="large"
-                        onChange={(value) => {
-                          setCidade(value)
-                        }}
-                        options={[
-                          {
-                            label: <span className="font-bold text-gray-800">Pernambuco</span>,
-                            options: [
-                              {label: "Agrestina", value: "Agrestina"},
-                              {label: "Altinho", value: "Altinho"},
-                              {label: "Belém de Maria", value: "Belém de Maria"},
-                              {label: "Bezerros", value: "Bezerros"},
-                              {label: "Bonito", value: "Bonito"},
-                              {label: "Canhotinho", value: "Canhotinho"},
-                              {label: "Caruaru", value: "Caruaru"},
-                              {label: "Gravatá", value: "Gravatá"},
-                              {label: "Ipojuca", value: "Ipojuca"},
-                              {label: "Recife", value: "Recife"},
-                              {label: "Riacho das Almas", value: "Riacho das Almas"},
-                              {label: "São Caetano", value: "São Caetano"},
-                              {label: "São Joaquim do Monte", value: "São Joaquim do Monte"},
-                              {label: "Tamandaré", value: "Tamandaré"},
-                            ],
-                          }
-                        ]}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={8}>
-                    <Form.Item label={<span className="font-bold">Bairro</span>} name="bairro">
-                      <Select
-                        placeholder="Selecione"
-                        allowClear
-                        size="large"
-                        onChange={(value) => {
-                          setBairro(value)
-                        }}
-                      >
-                        <Select.Option value="1">Centro</Select.Option>
+              {!tipoBuscaReferencia ? (
+                <Form 
+                  layout="vertical"
+                  fields={[
+                    {
+                      name: ["negocio"],
+                      value: negocio,
+                    },
+                    {
+                      name: ["tipo_imovel"],
+                      value: tipo,
+                    },
+                    {
+                      name: ["valor_min"],
+                      value: valorMin,
+                    },
+                    {
+                      name: ["valor_max"],
+                      value: valorMax,
+                    },
+                    {
+                      name: ["cidade"],
+                      value: cidade,
+                    },
+                    {
+                      name: ["bairro"],
+                      value: bairro,
+                    },
+                    {
+                      name: ["condominios"],
+                      value: condominios,
+                    },
+                  ]}
+                >
+                  <Row gutter={16}>
+                    <Col xs={{ span: 24 }} md={{ span: 6 }}>
+                      <Form.Item label={<span className="font-bold">Negócio</span>} name="negocio">
+                        <Select
+                          placeholder="Selecione"
+                          allowClear
+                          size="large"
+                          onChange={(value) => {
+                            setNegocio(value)
+                          }}
+                        >
+                          <Select.Option value="venda">Comprar</Select.Option>
+                          <Select.Option value="aluguel">Alugar</Select.Option>
                         </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col span={8}>
-                    <Form.Item label={<span className="font-bold">Condomínios</span>} name="condominios">
-                      <Select
-                        placeholder="Selecione"
-                        allowClear
-                        size="large"
-                        onChange={(value) => {
-                          setCondominios(value)
-                        }}
-                      >
-                        <Select.Option value="1">Centro</Select.Option>
+                      </Form.Item>
+                    </Col>
+                    <Col xs={{ span: 24 }} md={{ span: 6 }}>
+                      <Form.Item label={<span className="font-bold">Tipo de imóvel</span>} name="tipo_imovel">
+                        <Select
+                          placeholder="Selecione"
+                          allowClear
+                          size="large"
+                          onChange={(value) => {
+                            setTipo(value)
+                          }}
+                        >
+                          <Select.Option value="Apartamento">Apartamento</Select.Option>
+                          <Select.Option value="Casa">Casa</Select.Option>
+                          <Select.Option value="Terreno">Terreno</Select.Option>
+                          <Select.Option value="Fazenda">Fazenda</Select.Option>
+                          <Select.Option value="Chácara">Chácara</Select.Option>
+                          <Select.Option value="Sala">Sala</Select.Option>
+                          <Select.Option value="Prédio">Prédio</Select.Option>
+                          <Select.Option value="Pavilhão/Galpão">Pavilhão/Galpão</Select.Option>
+                          <Select.Option value="Ponto Comercial">Ponto Comercial</Select.Option>
                         </Select>
-                    </Form.Item>
-                  </Col>
-                </Row>
+                      </Form.Item>
+                    </Col>
+                    <Col xs={{ span: 24 }} md={{ span: 6 }}>
+                      <Form.Item label={<span className="font-bold">Valor Mínimo</span>} name="valor_min">
+                        <Input
+                          placeholder="Digite o valor mínimo"
+                          size="large"
+                          onChange={(e) => {
+                            const inputValue = e.target.value.replace(/\D/g, '');
+                            const formatted = new Intl.NumberFormat('pt-BR', {
+                              style: 'currency',
+                              currency: 'BRL',
+                              minimumFractionDigits: 2,
+                            }).format(Number(inputValue) / 100);
+                            setValorMin(formatted);
+                          }}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col xs={{ span: 24 }} md={{ span: 6 }}>
+                      <Form.Item label={<span className="font-bold">Valor Máximo</span>} name="valor_max">
+                        <Input
+                          placeholder="Digite o valor máximo"
+                          size="large"
+                          value={formattedValue}
+                          onChange={(e) => {
+                            const inputValue = e.target.value.replace(/\D/g, '');
+                            const formatted = new Intl.NumberFormat('pt-BR', {
+                              style: 'currency',
+                              currency: 'BRL',
+                              minimumFractionDigits: 2,
+                            }).format(Number(inputValue) / 100);
+                            setValorMax(formatted);
+                          }}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row gutter={16}>
+                  <Col xs={{ span: 24 }} md={{ span: 8 }}>
+                      <Form.Item label={<span className="font-bold">Cidade</span>} name="cidade">
+                        <Select
+                          placeholder="Selecione"
+                          allowClear
+                          size="large"
+                          onChange={(value) => {
+                            setCidade(value)
+                          }}
+                          options={[
+                            {
+                              label: <span className="font-bold text-gray-800">Pernambuco</span>,
+                              options: [
+                                {label: "Agrestina", value: "Agrestina"},
+                                {label: "Altinho", value: "Altinho"},
+                                {label: "Belém de Maria", value: "Belém de Maria"},
+                                {label: "Bezerros", value: "Bezerros"},
+                                {label: "Bonito", value: "Bonito"},
+                                {label: "Canhotinho", value: "Canhotinho"},
+                                {label: "Caruaru", value: "Caruaru"},
+                                {label: "Gravatá", value: "Gravatá"},
+                                {label: "Ipojuca", value: "Ipojuca"},
+                                {label: "Recife", value: "Recife"},
+                                {label: "Riacho das Almas", value: "Riacho das Almas"},
+                                {label: "São Caetano", value: "São Caetano"},
+                                {label: "São Joaquim do Monte", value: "São Joaquim do Monte"},
+                                {label: "Tamandaré", value: "Tamandaré"},
+                              ],
+                            }
+                          ]}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col xs={{ span: 24 }} md={{ span: 8 }}>
+                      <Form.Item label={<span className="font-bold">Bairro</span>} name="bairro">
+                        <Select
+                          placeholder="Selecione"
+                          allowClear
+                          size="large"
+                          onChange={(value) => {
+                            setBairro(value)
+                          }}
+                        >
+                          <Select.Option value="1">Centro</Select.Option>
+                          </Select>
+                      </Form.Item>
+                    </Col>
+                    <Col xs={{ span: 24 }} md={{ span: 8 }}>
+                      <Form.Item label={<span className="font-bold">Condomínios</span>} name="condominios">
+                        <Select
+                          placeholder="Selecione"
+                          allowClear
+                          size="large"
+                          onChange={(value) => {
+                            setCondominios(value)
+                          }}
+                        >
+                          <Select.Option value="1">Centro</Select.Option>
+                          </Select>
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row gutter={16}>
+                          <div className="flex justify-between w-full">
+                            <div>
+                              <span className="font-medium">Últimas pesquisas</span>
+                            </div>
+                            <div>
+                              <button 
+                                className="ml-2 bg-orange-400 p-2 text-white font-bold hover:text-gray-800"
+                                onClick={handleSearch}
+                              >
+                                Pesquisar
+                              </button>
+                            </div>
+                          </div>
+                  </Row>
+                </Form>
+              ) : (
+                <Form
+                  layout="vertical"
+                  fields={[
+                    {
+                      name: ["referencia"],
+                      value: referencia,
+                    },
+                  ]}
+                >
+                  <Form.Item label={<span className="font-bold">Referência</span>} name="referencia">
+                    <Input
+                      placeholder="Digite a referência"
+                      size="large"
+                      onChange={(e) => {
+                        setReferencia(e.target.value)
+                      }}
+                    />
+                </Form.Item>
                 <Row gutter={16}>
-                        <div className="flex justify-between w-full">
-                          <div>
-                            <span className="font-medium">Últimas pesquisas</span>
+                          <div className="flex justify-between w-full">
+                            <div>
+                              <span className="font-medium">Últimas pesquisas</span>
+                            </div>
+                            <div>
+                              <button 
+                                className="ml-2 bg-orange-400 p-2 text-white font-bold hover:text-gray-800"
+                                onClick={handleSearch}
+                              >
+                                Pesquisar
+                              </button>
+                            </div>
                           </div>
-                          <div>
-                            <button 
-                              className="ml-2 bg-orange-400 p-2 text-white font-bold hover:text-gray-800"
-                              onClick={handleSearch}
-                            >
-                              Pesquisar
-                            </button>
-                          </div>
-                        </div>
-                </Row>
-              </Form>
+                  </Row>
+                </Form>
+              )}
             </div>
           </div>
           <div>
-          <section className="my-8 flex justify-center items-center">
+          <section className="my-8 flex justify-center items-center mx-10">
             <Slider {...settings} className="w-full">
               {properties.map((item, index) => (
                 <CarouselItem 
@@ -393,6 +433,7 @@ export default function Home() {
                   text={item.title_formatted} 
                   description={item.description}
                   price={item.price}
+                  link={`/imovel/${item.url}`}
                 />
               ))}
             </Slider>

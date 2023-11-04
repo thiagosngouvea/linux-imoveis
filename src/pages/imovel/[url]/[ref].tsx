@@ -152,7 +152,15 @@ export default function Imovel() {
               </p>
             </div>
             <div className="gap-2">
-                <button className="bg-green-500 hover:bg-orange-400 text-white font-normal py-2 px-4">
+                <button 
+                  className="bg-green-500 hover:bg-orange-400 text-white font-normal py-2 px-4"
+                  onClick={() => {
+                    const mensagem = window.location.href;
+                    const numeroWhatsApp = '5581991080294'; // Substitua pelo número desejado
+                    const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensagem)}`;
+                    window.open(urlWhatsApp, '_blank');
+                  }}
+                  >
                     Compartilhar no Whatsapp
                 </button>
                 <button className="bg-white hover:bg-orange-400 text-black border font-normal py-2 px-4 ml-1">

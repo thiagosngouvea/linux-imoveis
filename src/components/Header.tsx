@@ -10,14 +10,14 @@ export function Header() {
   return (
     <header className="text-white">
       <nav className="max-w-8xl mx-auto px-2 sm:px-6 lg:px-4" aria-label="Top">
-        <div className="w-full py-6 flex items-center justify-between border-b border-gray-800 sm:border-none">
+        <div className="w-full py-6 xs:grid md:flex xs:justify-center items-center md:justify-between border-b border-gray-800 sm:border-none">
           <Link href="https://api.whatsapp.com/send?phone=5581994764467" className="flex items-center">
             <button className="flex font-medium p-2 rounded-md text-gray-800 border border-gray-300 rounded-3xl px-4 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
             (81) 99476-4467
             <FaWhatsappSquare size={24} className="ml-2 text-green-500" />
             </button>
           </Link>
-          <div className="flex items-center pr-20">
+          <div className="xs:grid md:flex items-center md:pr-20">
             <Link href="/">
                 <Image
                     src={Logo}
@@ -27,7 +27,7 @@ export function Header() {
                 />
             </Link>
           </div>
-          <div className="flex items-center">
+          <div className="flex xs:justify-center items-center">
             <Link href="https://www.facebook.com/linuximoveis" className="text-gray-800 mr-2" target="_blank">
                 <AiFillFacebook size={30} />
             </Link>

@@ -20,7 +20,7 @@ export function Footer() {
                 />
             )}
             <div className="container mx-auto py-12 px-4 grid grid-cols-5 gap-3">
-                <div className="col-span-1">
+                <div className="xs:col-span-5 md:col-span-1 xs:grid xs:justify-center">
                     <Image
                         src={Logo}
                         alt="Workflow"
@@ -28,7 +28,7 @@ export function Footer() {
                         quality={100}
                     />
                 </div>
-                <div className="col-span-2">
+                <div className="xs:col-span-5 md:col-span-2">
                     <span className="text-gray-800 text-lg font-serif">Linux Imóveis</span>
                     <p className="text-gray-600">
                     CNPJ - 32.711.891/0001-80
@@ -37,7 +37,7 @@ export function Footer() {
                     Av. Agamenon Magalhães, 444 - Ed Empresarial Difusora, Andar 11, Sala 630, Maurício de Nassau - Caruaru/PE, 55012-290
                     </p>
                 </div>
-                <div className="col-span-2 grid grid-cols-2">
+                <div className="xs:col-span-5 md:col-span-2 grid grid-cols-2">
                     <div className="col-span-1 grid justify-center">
                         <span className="text-gray-800 text-lg font-serif">Menu</span>
                         <ul className="mt-2 text-gray-600">
