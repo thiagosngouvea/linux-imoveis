@@ -43,7 +43,7 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ imageSrc, text, description
       onClick={()=> window.open(link, "_blank")}
       >
         <img 
-        src={'https://'+imageSrc} 
+        src={imageSrc} 
         alt="Imagem do Carrossel" 
         className="mx-4"
         style={{

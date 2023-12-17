@@ -9,63 +9,7 @@ import Slider from 'react-slick';
 import { propertiesService } from "@/services/properties.service"
 import { useRouter } from "next/router"
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl"
-
-interface Property {
-  id: string
-  title_formatted: string
-  images: string[]
-  address: string
-  description: string
-  price: string
-  transaction: string
-  rooms: {
-    bathroom: {
-      title_formated: string
-    }
-    bedroom: {
-      title_formated: string
-    }
-    closet: {
-      title_formated: string
-    }
-    garage: {
-      title_formated: string
-    }
-  }
-  areas: {
-    primary_area: {
-      measure: string
-      title: string
-      value: string
-    }
-    total_area: {
-      measure: string
-      title: string
-      value: string
-    }
-    built_area: {
-      measure: string
-      title: string
-      value: string
-    }
-    private_area: {
-      measure: string
-      title: string
-      value: string
-    }
-  }
-  url: string
-  reference: string
-}
-
-// const contentStyle: React.CSSProperties = {
-//   margin: 0,
-//   height: '160px',
-//   color: '#fff',
-//   lineHeight: '160px',
-//   textAlign: 'center',
-//   background: '#364d79',
-// };
+import { Property } from "@/types/property"
 
 function SampleNextArrow(props:any) {
   const { className, style, onClick } = props;
@@ -429,8 +373,8 @@ export default function Home() {
               {properties.map((item, index) => (
                 <CarouselItem 
                   key={index} 
-                  imageSrc={item.images ? item?.images[0] : "linuximoveis.nyc3.digitaloceanspaces.com/propertiesImages/ab774d90f94834844bdcc5858a047a90-Resultado-PPGEC.pn"} 
-                  text={item.title_formatted} 
+                  imageSrc={item.images_old_links ? item?.images_old_links[0] : "linuximoveis.nyc3.digitaloceanspaces.com/propertiesImages/ab774d90f94834844bdcc5858a047a90-Resultado-PPGEC.pn"} 
+                  text={item.meta_title} 
                   description={item.description}
                   price={item.price}
                   link={`/imovel/${item.url}`}
@@ -444,18 +388,12 @@ export default function Home() {
             {properties.map((property) => (
                   <PropertyCard
                     key={property?.id}
-                    title_formatted={property?.title_formatted}
-                    images={property?.images}
-                    address={property?.address}
-                    description={property?.description}
+                    meta_title={property?.meta_title}
+                    images_old_links={property?.images_old_links}
                     price={property?.price}
                     transaction={property?.transaction}
-                    bedrooms={property?.rooms?.bedroom?.title_formated}
-                    garage={property?.rooms?.garage?.title_formated}
-                    private_area={property?.areas?.private_area}
-                    total_area={property?.areas?.total_area}
-                    built_area={property?.areas?.built_area}
-                    primary_area={property?.areas?.primary_area}
+                    bedroom={property?.bedroom}
+                    garage={property?.garage}
                     url={property?.url}
                     reference={property?.reference}
                   />

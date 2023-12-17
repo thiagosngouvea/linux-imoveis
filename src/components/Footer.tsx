@@ -3,6 +3,9 @@ import Image from "next/image";
 import Logo from "@/assets/logo.png"
 import FooterImg from "@/assets/footer_img.jpg"
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { AiFillFacebook } from "react-icons/ai";
+import { BsInstagram } from "react-icons/bs";
 
 export function Footer() {
     const router = useRouter();
@@ -68,7 +71,14 @@ export function Footer() {
                                 <a href="#" className="hover:text-gray-800">(81) 99476-4467</a>
                             </li>
                             <li className="mt-2">
-                                <a href="#" className="hover:text-gray-800">*** ***</a>
+                                <div className="flex items-center">
+                                    <Link href="https://www.facebook.com/linuximoveis" className="text-gray-800 mr-2" target="_blank">
+                                        <AiFillFacebook size={30} />
+                                    </Link>
+                                    <Link href="https://www.instagram.com/linuximoveis/" className="text-gray-800" target="_blank">
+                                        <BsInstagram size={24} />
+                                    </Link>
+                                </div>
                             </li>
                         </ul>
                     </div>

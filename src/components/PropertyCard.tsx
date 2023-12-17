@@ -1,60 +1,36 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { Badge } from "antd";
+import { Badge, Modal } from "antd";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useRouter } from "next/router";
+import { WhatsappShareButton } from "react-share";
+import InputMask from 'react-input-mask';
 import Link from "next/link";
-
 interface PropertyCardProps {
-  images?: string[] | undefined;
-  address?: string | undefined;
-  description?: string | undefined;
-  title_formatted: string;
-  price?: string | undefined;
-  transaction?: string | undefined;
-  bedrooms?: string | undefined;
-  garage?: string | undefined;
-  private_area?: {
-    measure: string;
-    title: string;
-    value: string;
-  }
-  built_area?: {
-    measure: string;
-    title: string;
-    value: string;
-  }
-  total_area?: {
-    measure: string;
-    title: string;
-    value: string;
-  }
-  primary_area?:{
-    measure: string;
-    title: string;
-    value: string;
-  }
-  url?: string | undefined;
-  reference?: string | undefined;
+  images?: string[];
+  images_old_links?: string[];
+  price?: string;
+  transaction?: string;
+  bedroom?: number | undefined;
+  garage?: number;
+  url?: string;
+  reference?: string;
+  meta_title?: string;
 }
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
   images = [],
-  address,
-  description,
-  title_formatted,
+  images_old_links = [],
   price,
   transaction,
-  bedrooms,
+  bedroom,
   garage,
-  private_area,
-  built_area,
-  total_area,
-  primary_area,
   url,
   reference,
+  meta_title,
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const router = useRouter();
 
@@ -69,9 +45,11 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   };
 
   //refatorar os links das imagens e remover o /{size}/{type}
-  const imagesRefactored = images?.map((image) => {
+  const imagesRefactored = images_old_links?.map((image) => {
     return image;
   });
+
+  console.log(imagesRefactored)
 
   const verificarJson = (json: any) => {
     //verifica se o json é um objeto
@@ -97,7 +75,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
     }
   };
 
-  const adressFormatted = verificarJson(address) ? JSON.parse(address || "{}") : address;
+  // const adressFormatted = verificarJson(address) ? JSON.parse(address || "{}") : address;
 
 
 
@@ -112,6 +90,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   }
 
   return (
+    <>
     <Badge.Ribbon text={<span className="font-medium">{transaction}</span>} color="orange">
       <Link 
         href={replaceAcessUrl(url || "", reference || "")}
@@ -136,23 +115,47 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           </button>
 
           <Image
-            src={!!imagesRefactored ? 'https://'+imagesRefactored[currentImageIndex] : 'https://via.placeholder.com/300'}
+            src={!!imagesRefactored ? imagesRefactored[currentImageIndex] : 'https://via.placeholder.com/300'}
             alt="Property image"
             layout="fill"
             objectFit="cover"
           />
         </div>
-        <div className="p-4 h-48">
-          <h1 className="text-sm text-gray-600 font-semibold mb-2 truncate">{title_formatted}</h1>
-          <h2 className="text-gray-500 text-sm truncate">{adressFormatted.formatted}</h2>
+        <div className="p-4 h-36">
+          <h1 className="text-sm text-gray-600 font-semibold mb-2 truncate">{meta_title}</h1>
+          {/* <h2 className="text-gray-500 text-sm truncate">{adressFormatted?.formatted}</h2> */}
           <span className="text-orange-500 text-xl font-bold truncate">{price}</span>
-          <p className="text-gray-500 text-sm truncate">{bedrooms}</p>
-          <p className="text-gray-500 text-sm truncate">{garage}</p>
-          <p className="text-gray-500 text-sm truncate">{primary_area?.value} {primary_area?.measure} {`(${primary_area?.title})`}</p>
+          <p className="text-gray-500 text-sm truncate">{bedroom} {bedroom && bedroom > 1 ? 'Quartos' : 'Quarto'}</p>
+          <p className="text-gray-500 text-sm truncate">{garage} {garage && garage > 1 ? 'Garagens' : 'Garagem'}</p>
+          {/* <p className="text-gray-500 text-sm truncate">{primary_area?.value} {primary_area?.measure} {`(${primary_area?.title})`}</p> */}
         </div>
       </div>
       </Link>
+      {/* <button
+            className="z-99 bg-orange-500 text-white w-full py-3 font-semibold focus:outline-none"
+            onClick={() => {
+              setIsModalVisible(true)
+            }}
+          >
+            Compartilhar
+      </button> */}
+
     </Badge.Ribbon>
+    <Modal
+      visible={isModalVisible}
+      footer={null}
+      onCancel={() => {
+        setIsModalVisible(false)
+      }}
+      width={1000}
+      centered
+    >
+      <input
+        className="w-full border border-gray-300 rounded-md p-2 mb-4"
+        placeholder="Insira o número do WhatsApp"
+      />
+    </Modal>
+    </>
   );
 };
 
