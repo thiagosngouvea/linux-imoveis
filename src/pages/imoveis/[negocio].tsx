@@ -655,21 +655,15 @@ export default function ComprarAlugar() {
         <div className="xl:col-span-4 lg:col-span-3 md:col-span-3 sm:col-span-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-3 gap-12 justify-items-center">
           {properties.map((property) => (
             <PropertyCard
-              key={property?.id}
-              title_formatted={property?.title_formatted}
-              images={property?.images}
-              address={property?.address}
-              description={property?.description}
-              price={property?.price}
-              transaction={property?.transaction}
-              bedrooms={property?.rooms?.bedroom?.title_formated}
-              garage={property?.rooms?.garage?.title_formated}
-              private_area={property?.areas?.private_area}
-              total_area={property?.areas?.total_area}
-              built_area={property?.areas?.built_area}
-              primary_area={property?.areas?.primary_area}
-              url={property?.url}
-              reference={property?.reference}
+            key={property?.id}
+            meta_title={property?.meta_title}
+            images_old_links={property?.images_old_links}
+            price={property?.price}
+            transaction={property?.transaction}
+            bedroom={property?.bedroom}
+            garage={property?.garage}
+            url={property?.url}
+            reference={property?.reference}
             />
           ))}
         </div>
