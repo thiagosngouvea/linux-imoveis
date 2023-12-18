@@ -11,8 +11,9 @@ interface PropertyCardProps {
   images_old_links?: string[];
   price?: string;
   transaction?: string;
-  bedroom?: number | undefined;
-  garage?: number;
+  bedroom?: number | undefined | null;
+  suites?: number | undefined | null;
+  garage?: number | undefined | null;
   url?: string;
   reference?: string;
   meta_title?: string;
@@ -24,6 +25,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   price,
   transaction,
   bedroom,
+  suites,
   garage,
   url,
   reference,
@@ -48,8 +50,6 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   const imagesRefactored = images_old_links?.map((image) => {
     return image;
   });
-
-  console.log(imagesRefactored)
 
   const verificarJson = (json: any) => {
     //verifica se o json é um objeto
@@ -125,8 +125,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           <h1 className="text-sm text-gray-600 font-semibold mb-2 truncate">{meta_title}</h1>
           {/* <h2 className="text-gray-500 text-sm truncate">{adressFormatted?.formatted}</h2> */}
           <span className="text-orange-500 text-xl font-bold truncate">{price}</span>
-          <p className="text-gray-500 text-sm truncate">{bedroom} {bedroom && bedroom > 1 ? 'Quartos' : 'Quarto'}</p>
-          <p className="text-gray-500 text-sm truncate">{garage} {garage && garage > 1 ? 'Garagens' : 'Garagem'}</p>
+          <p className="text-gray-500 text-sm truncate">{bedroom ?? null} {bedroom !== null ? bedroom && bedroom > 1 ? 'Quartos' : 'Quarto' : ``} {!!suites ? `${suites > 1  ? `,sendo ${suites} suites` : `,sendo ${suites} suite`}` : ''}</p>
+          <p className="text-gray-500 text-sm truncate">{garage ?? null} {garage !== null ? garage && garage > 1 ? 'Garagens' : 'Garagem' : ``}</p>
           {/* <p className="text-gray-500 text-sm truncate">{primary_area?.value} {primary_area?.measure} {`(${primary_area?.title})`}</p> */}
         </div>
       </div>

@@ -29,7 +29,7 @@ export default function ComprarAlugar() {
   const [garagensFilter, setGaragensFilter] = useState<string | null>("eq");
   const [garagens, setGaragens] = useState<number | null>(null);
   const [aceitaFinanciamento, setAceitaFinanciamento] =
-    useState<boolean>(false);
+    useState<boolean | null>(false);
   const [perfilImovel, setPerfilImovel] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -38,9 +38,9 @@ export default function ComprarAlugar() {
   const [pageSize, setPageSize] = useState(21)
 
   const getPropertieFiltered = useCallback(async () => {
-    let filterBy = "";
-    let filterValue = "";
-    let filterType = "";
+    let filterBy = "status";
+    let filterValue = "Disponível";
+    let filterType = "eq";
 
     if (router.query.negocio !== "comprar-alugar") {
       filterBy += filterBy === "" ? "transaction" : ",transaction";
@@ -61,7 +61,7 @@ export default function ComprarAlugar() {
     }
 
     if (router.query.cidade !== "") {
-      filterBy += filterBy === "" ? "address" : ",address";
+      filterBy += filterBy === "" ? "city" : ",city";
       filterValue +=
         filterValue === ""
           ? (router.query.cidade as string)
@@ -70,7 +70,7 @@ export default function ComprarAlugar() {
     }
 
     if (router.query.bairro !== "") {
-      filterBy += filterBy === "" ? "address" : ",address";
+      filterBy += filterBy === "" ? "neighborhood" : ",neighborhood";
       filterValue +=
         filterValue === ""
           ? (router.query.bairro as string)
@@ -78,15 +78,15 @@ export default function ComprarAlugar() {
       filterType += filterType === "" ? "ilike" : ",ilike";
     }
 
-    if (router.query.valor_min !== "0" || router.query.valor_max !== "0") {
+    if (valorMin !== "0" || valorMax !== "0") {
       filterBy += filterBy === "" ? "price" : ",price";
       filterValue +=
         filterValue === ""
-          ? `${router.query.valor_min as string}|${
-              router.query.valor_max as string
+          ? `${valorMin as string}|${
+              valorMax as string
             }`
-          : `,${router.query.valor_min as string}|${
-              router.query.valor_max as string
+          : `,${valorMin as string}|${
+              valorMax as string
             }`;
       filterType += filterType === "" ? "btw_price" : ",btw_price";
     }
@@ -99,7 +99,7 @@ export default function ComprarAlugar() {
     }
 
     if (suites !== null) {
-      filterBy += filterBy === "" ? "suite" : ",suite";
+      filterBy += filterBy === "" ? "suites" : ",suites";
       filterValue += filterValue === "" ? suites : `,${suites}`;
       filterType += filterType === "" ? suitesFilter : `,${suitesFilter}`;
     }
@@ -111,12 +111,19 @@ export default function ComprarAlugar() {
     }
 
     if (!!aceitaFinanciamento) {
-      (filterBy += filterBy === "" ? "ficha_imovel" : ",ficha_imovel"),
+      (filterBy += filterBy === "" ? "accept_financing" : ",accept_financing"),
         (filterValue +=
           filterValue === ""
-            ? "Aceita Financiamento"
-            : ",Aceita Financiamento"),
-        (filterType += filterType === "" ? "ilike" : ",ilike");
+            ? "true"
+            : ",true"),
+        (filterType += filterType === "" ? "eq" : ",eq");
+    } else if (aceitaFinanciamento === false && aceitaFinanciamento !== null) {
+      (filterBy += filterBy === "" ? "accept_financing" : ",accept_financing"),
+        (filterValue +=
+          filterValue === ""
+            ? "false"
+            : ",false"),
+        (filterType += filterType === "" ? "eq" : ",eq");
     }
 
     if (!!perfilImovel.residencial) {
@@ -173,8 +180,8 @@ export default function ComprarAlugar() {
     router.query.tipo,
     router.query.cidade,
     router.query.bairro,
-    router.query.valor_min,
-    router.query.valor_max,
+    valorMin,
+    valorMax,
     perfilImovel,
     page,
     pageSize,
@@ -269,6 +276,18 @@ export default function ComprarAlugar() {
       key: "3",
     },
   ];
+
+  useEffect(() => {
+    if (router.query && Object.keys(router.query).length > 0) {
+      setNegocio(router.query.negocio as string);
+      setTipo(router.query.tipo as string);
+      setCidade(router.query.cidade as string);
+      setBairro(router.query.bairro as string);
+      setValorMin(router.query.valor_min as string);
+      setValorMax(router.query.valor_max as string);
+    }
+  }, [router.query]);
+
 
   return (
     <div className="w-full xl:max-w-screen-2xl 3xl:max-w-screen-3xl md:max-w-screen-lg mx-auto mt-8">
@@ -566,14 +585,26 @@ export default function ComprarAlugar() {
               <span>Aceita Financiamento</span>
               <div className="grid grid-cols-2">
                 <button
-                  className="border hover:bg-gray-300 text-gray-800 font-normal py-2 px-4"
-                  onClick={() => setAceitaFinanciamento(true)}
+                  className={`${!!aceitaFinanciamento ? "bg-orange-400 text-white" : ""} border hover:bg-gray-300 text-gray-800 font-normal py-2 px-4`}
+                  onClick={() => {
+                    if (!!aceitaFinanciamento) {
+                      setAceitaFinanciamento(null);
+                    } else {
+                    setAceitaFinanciamento(true)
+                    }
+                  }}
                 >
                   Sim
                 </button>
                 <button
-                  className="border hover:bg-gray-300 text-gray-800 font-normal py-2 px-4"
-                  onClick={() => setAceitaFinanciamento(false)}
+                  className={`${!aceitaFinanciamento && aceitaFinanciamento !== null ? "bg-orange-400 text-white" : ""} border hover:bg-gray-300 text-gray-800 font-normal py-2 px-4`}
+                  onClick={() => {
+                    if (aceitaFinanciamento === false) {
+                      setAceitaFinanciamento(null);
+                    } else {
+                    setAceitaFinanciamento(false)
+                    }
+                  }}
                 >
                   Não
                 </button>
@@ -661,9 +692,11 @@ export default function ComprarAlugar() {
             price={property?.price}
             transaction={property?.transaction}
             bedroom={property?.bedroom}
+            suites={property?.suites}
             garage={property?.garage}
             url={property?.url}
             reference={property?.reference}
+
             />
           ))}
         </div>

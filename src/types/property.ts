@@ -16,6 +16,7 @@ export interface Property {
     images_old_links: string[];
     garage: number;
     bathroom: number;
+    suites: number;
     bedroom: number;
     dining_room: number;
     kitchen: number;
@@ -40,4 +41,8 @@ export interface Property {
     profile: string;
     reference: string;
     meta_title: string;
+    nearby: string;
+    highlight_website: string;
+    written: string;
+    accept_financing: string;
 }

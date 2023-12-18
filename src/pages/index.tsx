@@ -38,6 +38,7 @@ function SamplePrevArrow(props:any) {
 export default function Home() {
 
   const [properties, setProperties] = useState<Property[]>([])
+  const [propertiesHighlight, setPropertiesHighlight] = useState<Property[]>([])
 
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
@@ -65,9 +66,16 @@ export default function Home() {
   const router = useRouter()
 
   const getProperties = useCallback(async () => {
+    let filterBy = "status";
+    let filterValue = "Disponível";
+    let filterType = "eq";
+
     await propertiesService.getAll(
       page,
       pageSize,
+      filterBy,
+      filterValue,
+      filterType
     )
     .then((response) => {
       setProperties(response.data.properties.result)
@@ -82,11 +90,29 @@ export default function Home() {
     getProperties()
   }, [getProperties, page, pageSize])
 
-  // const handlePagination = useCallback(async (page: number, pageSize: number | undefined) => {
-    
-  // }, [])
+  const getPropertiesHighlight = useCallback(async () => {
+    let filterBy = "highlight_website";
+    let filterValue = "true";
+    let filterType = "eq";
 
+    await propertiesService.getAll(
+      page,
+      pageSize,
+      filterBy,
+      filterValue,
+      filterType
+    )
+    .then((response) => {
+      setPropertiesHighlight(response.data.properties.result)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }, [page, pageSize])
 
+  useEffect(() => {
+    getPropertiesHighlight()
+  }, [getPropertiesHighlight, page, pageSize])
 
   const handleSearch = useCallback(async () => {
     //remover toda a formatacao de preco de valorMin e valorMax remover os pontos e o R$ e o , e o que tiver apos a ,
@@ -94,9 +120,6 @@ export default function Home() {
     const valorMinFormatado = valorMin?.replace("R$", "").replace(".", "").replace(/,.*$/g, "").replace(/\s/g, "");
     const valorMaxFormatado = valorMax?.replace("R$", "").replace(".", "").replace(/,.*$/g, "").replace(/\s/g, "");
     
-
-    console.log(valorMinFormatado);
-
     router.push({
       pathname: `/imoveis/${negocio ?? "comprar-alugar"}`,
       query: {
@@ -106,6 +129,7 @@ export default function Home() {
         cidade: cidade,
         bairro: bairro,
         condominios: condominios,
+        referencia: referencia,
       },
     })
 
@@ -394,6 +418,7 @@ export default function Home() {
                     transaction={property?.transaction}
                     bedroom={property?.bedroom}
                     garage={property?.garage}
+                    suites={property?.suites}
                     url={property?.url}
                     reference={property?.reference}
                   />
