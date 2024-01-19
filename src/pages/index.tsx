@@ -55,6 +55,11 @@ export default function Home() {
   const [bairro, setBairro] = useState<string | null>(null)
   const [condominios, setCondominios] = useState<string | null>(null)
 
+  const [neighborhoods, setNeighborhoods] = useState<string[]>([])
+  const [cities, setCities] = useState<string[]>([])
+  const [condominiums, setCondominiums] = useState<string[]>([])
+  const [types, setTypes] = useState<string[]>([])
+
   const [tipoBuscaReferencia, setTipoBuscaReferencia] = useState<boolean | null>(false)
   const [referencia, setReferencia] = useState<string | null>(null)
 
@@ -89,6 +94,64 @@ export default function Home() {
   useEffect(() => {
     getProperties()
   }, [getProperties, page, pageSize])
+
+
+  const getNeighborhoods = useCallback(async () => {
+    await propertiesService.getNeighborhoods()
+    .then((response: any) => {
+      setNeighborhoods(response.data.neighborhoods)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  } , [])
+
+  useEffect(() => {
+    getNeighborhoods()
+  }, [getNeighborhoods])
+
+  const getCities = useCallback(async () => {
+    await propertiesService.getCities()
+    .then((response: any) => {
+      setCities(response.data.cities)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  } , [])
+
+  useEffect(() => {
+    getCities()
+  }, [getCities])
+
+  const getCondominiums = useCallback(async () => {
+    await propertiesService.getCondominiums()
+    .then((response: any) => {
+      setCondominiums(response.data.condominiums)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  } , [])
+
+  useEffect(() => {
+    getCondominiums()
+  }, [getCondominiums])
+
+  const getTypes = useCallback(async () => {
+    await propertiesService.getTypes()
+    .then((response: any) => {
+      setTypes(response.data.types)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  } , [])
+
+  useEffect(() => {
+    getTypes()
+  }, [getTypes])
+
 
   const getPropertiesHighlight = useCallback(async () => {
     let filterBy = "highlight_website";
@@ -133,7 +196,7 @@ export default function Home() {
       },
     })
 
-  }, [valorMin, valorMax, negocio, tipo, cidade, bairro, condominios])
+  }, [valorMin, valorMax, negocio, tipo, cidade, bairro, condominios, referencia])
 
   const settings = {
     // dots: true,
@@ -226,15 +289,9 @@ export default function Home() {
                             setTipo(value)
                           }}
                         >
-                          <Select.Option value="Apartamento">Apartamento</Select.Option>
-                          <Select.Option value="Casa">Casa</Select.Option>
-                          <Select.Option value="Terreno">Terreno</Select.Option>
-                          <Select.Option value="Fazenda">Fazenda</Select.Option>
-                          <Select.Option value="Chácara">Chácara</Select.Option>
-                          <Select.Option value="Sala">Sala</Select.Option>
-                          <Select.Option value="Prédio">Prédio</Select.Option>
-                          <Select.Option value="Pavilhão/Galpão">Pavilhão/Galpão</Select.Option>
-                          <Select.Option value="Ponto Comercial">Ponto Comercial</Select.Option>
+                          {types.map((type) => (
+                            <Select.Option key={type} value={type}>{type}</Select.Option>
+                          ))}
                         </Select>
                       </Form.Item>
                     </Col>
@@ -284,28 +341,11 @@ export default function Home() {
                           onChange={(value) => {
                             setCidade(value)
                           }}
-                          options={[
-                            {
-                              label: <span className="font-bold text-gray-800">Pernambuco</span>,
-                              options: [
-                                {label: "Agrestina", value: "Agrestina"},
-                                {label: "Altinho", value: "Altinho"},
-                                {label: "Belém de Maria", value: "Belém de Maria"},
-                                {label: "Bezerros", value: "Bezerros"},
-                                {label: "Bonito", value: "Bonito"},
-                                {label: "Canhotinho", value: "Canhotinho"},
-                                {label: "Caruaru", value: "Caruaru"},
-                                {label: "Gravatá", value: "Gravatá"},
-                                {label: "Ipojuca", value: "Ipojuca"},
-                                {label: "Recife", value: "Recife"},
-                                {label: "Riacho das Almas", value: "Riacho das Almas"},
-                                {label: "São Caetano", value: "São Caetano"},
-                                {label: "São Joaquim do Monte", value: "São Joaquim do Monte"},
-                                {label: "Tamandaré", value: "Tamandaré"},
-                              ],
-                            }
-                          ]}
-                        />
+                          >
+                            {cities.map((city) => (
+                              <Select.Option key={city} value={city}>{city}</Select.Option>
+                            ))}
+                          </Select>
                       </Form.Item>
                     </Col>
                     <Col xs={{ span: 24 }} md={{ span: 8 }}>
@@ -318,7 +358,9 @@ export default function Home() {
                             setBairro(value)
                           }}
                         >
-                          <Select.Option value="1">Centro</Select.Option>
+                          {neighborhoods.map((neighborhood) => (
+                            <Select.Option key={neighborhood} value={neighborhood}>{neighborhood}</Select.Option>
+                          ))}
                           </Select>
                       </Form.Item>
                     </Col>
@@ -332,7 +374,9 @@ export default function Home() {
                             setCondominios(value)
                           }}
                         >
-                          <Select.Option value="1">Centro</Select.Option>
+                          {condominiums.map((condominium) => (
+                            <Select.Option key={condominium} value={condominium}>{condominium}</Select.Option>
+                          ))}
                           </Select>
                       </Form.Item>
                     </Col>

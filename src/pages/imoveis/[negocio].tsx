@@ -154,6 +154,13 @@ export default function ComprarAlugar() {
       filterType += filterType === "" ? "ilike" : ",ilike";
     }
 
+    if(!!router.query.referencia) {
+      filterBy += filterBy === "" ? "reference" : ",reference";
+      filterValue +=
+        filterValue === "" ? router.query.referencia : `,${router.query.referencia}`;
+      filterType += filterType === "" ? "ilike" : ",ilike";
+    }
+
     try {
       const res = await propertiesService.getAll(
         page,
